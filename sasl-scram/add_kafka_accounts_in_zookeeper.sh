@@ -19,4 +19,11 @@ docker run -it --rm -v ${KAFKA_SSL_SECRETS_DIR}/producer:/etc/kafka/secrets \
 -v ${KAFKA_SASL_SCRAM_SECRETS_DIR}/zookeeper_client_jaas.conf:/etc/kafka/secrets/zookeeper_client_jaas.conf  \
 -e KAFKA_OPTS="-Djava.security.auth.login.config=/etc/kafka/secrets/zookeeper_client_jaas.conf" \
 --network kafka-cluster-network confluentinc/cp-kafka:5.0.1 kafka-configs --zookeeper zookeeper-1:22181 \
+--describe --entity-type users --entity-name test
+
+docker run -it --rm -v ${KAFKA_SSL_SECRETS_DIR}/producer:/etc/kafka/secrets \
+-v ${KAFKA_SASL_SCRAM_SECRETS_DIR}/zookeeper_client_jaas.conf:/etc/kafka/secrets/zookeeper_client_jaas.conf  \
+-e KAFKA_OPTS="-Djava.security.auth.login.config=/etc/kafka/secrets/zookeeper_client_jaas.conf" \
+--network kafka-cluster-network confluentinc/cp-kafka:5.0.1 kafka-configs --zookeeper zookeeper-1:22181 \
 --describe --entity-type users --entity-name kafkabroker
+
